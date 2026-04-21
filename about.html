@@ -3,21 +3,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
+  <!-- Security + performance -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+  <!-- Mobile-first -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>About | Honda Legacy</title>
+
+  <!-- Tailwind for rapid styling -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    /* =========================
+       REDUCED MOTION SUPPORT
+       Disables animations if user prefers less motion
+       ========================= */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 text-gray-800">
 
+  <!-- =========================
+       NAVIGATION
+       ========================= -->
   <header class="bg-white shadow-md">
     <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-xl font-bold text-red-600 hover:text-red-700 transition duration-300">
+      <a href="meresa_yididiya_animatedcapstone.html" class="text-xl font-bold text-red-600 hover:text-red-700 transition duration-300">
         Honda Legacy
       </a>
 
       <ul class="hidden md:flex space-x-6 font-medium">
-        <li><a href="index.html" class="hover:text-red-600 transition duration-300">Home</a></li>
+        <li><a href="meresa_yididiya_animatedcapstone.html" class="hover:text-red-600 transition duration-300">Home</a></li>
         <li><a href="about.html" class="text-red-600 font-semibold">About</a></li>
         <li><a href="gallery.html" class="hover:text-red-600 transition duration-300">Gallery</a></li>
         <li><a href="media.html" class="hover:text-red-600 transition duration-300">Media</a></li>
@@ -28,6 +51,9 @@
 
   <main class="max-w-6xl mx-auto px-4 py-12">
 
+    <!-- =========================
+         HERO SECTION
+         ========================= -->
     <section class="text-center mb-12">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600 mb-4">
         About Us
@@ -39,27 +65,48 @@
       </p>
     </section>
 
-    <section class="mb-12">
-      <img 
-        src="images/about-honda-hero.jpg" 
-        alt="Soichiro Honda"
-        class="w-full rounded-2xl shadow-md hover:scale-105 transition duration-300"
-      />
+    <!-- =========================
+         HERO IMAGE (Clickable Modal)
+         INTERACTIVE ELEMENT #1
+         ========================= -->
+    <section class="mb-12 text-center">
+      <button onclick="openModal()" class="focus:outline-none">
+        <img 
+          src="about-honda-hero.jpg" 
+          alt="Portrait of Soichiro Honda, founder of Honda"
+          class="w-full rounded-2xl shadow-md hover:scale-105 focus:scale-105 transition duration-300"
+        />
+      </button>
+      <p class="text-sm text-gray-500 mt-2">Click image to expand</p>
     </section>
 
+    <!-- =========================
+         ACCORDION SECTION
+         INTERACTIVE ELEMENT #2
+         ========================= -->
     <section class="grid gap-8 md:grid-cols-2">
-      
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-        <h3 class="text-xl font-semibold mb-3 text-gray-800">Our Heritage</h3>
-        <p class="text-gray-600">
+
+      <!-- Heritage -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <button onclick="toggleSection('heritage')" class="w-full text-left">
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">
+            Our Heritage
+          </h3>
+        </button>
+        <p id="heritage" class="text-gray-600 hidden">
           Founded in 1948 by Soichiro Honda, we have grown from a small engine
           manufacturer to a global leader in automotive engineering.
         </p>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition duration-300">
-        <h3 class="text-xl font-semibold mb-3 text-gray-800">Our Vision</h3>
-        <p class="text-gray-600">
+      <!-- Vision -->
+      <div class="bg-white p-6 rounded-xl shadow">
+        <button onclick="toggleSection('vision')" class="w-full text-left">
+          <h3 class="text-xl font-semibold mb-3 text-gray-800">
+            Our Vision
+          </h3>
+        </button>
+        <p id="vision" class="text-gray-600 hidden">
           We strive to be a company that society wants to exist by creating
           technologies that improve lives and protect the planet.
         </p>
@@ -69,9 +116,41 @@
 
   </main>
 
+  <!-- =========================
+       MODAL (Lightbox reuse idea)
+       ========================= -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center">
+    <span onclick="closeModal()" class="absolute top-5 right-8 text-white text-3xl cursor-pointer">&times;</span>
+    <img src="about-honda-hero.jpg" alt="Expanded view of Soichiro Honda" class="max-w-[90%] max-h-[80%]">
+  </div>
+
+  <!-- =========================
+       FOOTER
+       ========================= -->
   <footer class="bg-gray-800 text-white text-center py-6 mt-12">
     <p class="text-sm">&copy; 2026 Honda Legacy. All rights reserved.</p>
   </footer>
+
+  <!-- =========================
+       JAVASCRIPT
+       ========================= -->
+  <script>
+    // Toggle accordion sections (adds interactivity + storytelling pacing)
+    function toggleSection(id) {
+      const section = document.getElementById(id);
+      section.classList.toggle("hidden");
+    }
+
+    // Open modal for image expansion
+    function openModal() {
+      document.getElementById("modal").classList.remove("hidden");
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById("modal").classList.add("hidden");
+    }
+  </script>
 
 </body>
 </html>
